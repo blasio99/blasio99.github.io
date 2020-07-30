@@ -1,72 +1,4 @@
-<?php
-/*
-* Author: Benedek Balazs
-*/
-session_start();
-include('db.php');
-$status="";
-if (isset($_POST['code']) && $_POST['code']!=""){
-$code = $_POST['code'];
-$result = mysqli_query($con,"SELECT * FROM `products` WHERE `code`='$code'");
-$row = mysqli_fetch_assoc($result);
-$name = $row['name'];
-$code = $row['code'];
-$price = $row['price'];
-$image = $row['image'];
-
-$cartArray = array(
-	$code=>array(
-	'name'=>$name,
-	'code'=>$code,
-	'price'=>$price,
-	'quantity'=>1,
-	'image'=>$image)
-);
-
-if(empty($_SESSION["shopping_cart"])) {
-	$_SESSION["shopping_cart"] = $cartArray;
-	$status = "<div class='box'>Product is added to your cart!</div>";
-}else{
-	$array_keys = array_keys($_SESSION["shopping_cart"]);
-	if(in_array($code,$array_keys)) {
-		$status = "<div class='box' style='color:red;'>
-		Product is already added to your cart!</div>";	
-	} else {
-	$_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartArray);
-	$status = "<div class='box'>Product is added to your cart!</div>";
-	}
-
-	}
-}
-?>
-
-<?php
-session_start();
-$status="";
-if (isset($_POST['action']) && $_POST['action']=="remove"){
-if(!empty($_SESSION["shopping_cart"])) {
-	foreach($_SESSION["shopping_cart"] as $key => $value) {
-		if($_POST["code"] == $key){
-		unset($_SESSION["shopping_cart"][$key]);
-		$status = "<div class='box' style='color:red;'>
-		Product is removed from your cart!</div>";
-		}
-		if(empty($_SESSION["shopping_cart"]))
-		unset($_SESSION["shopping_cart"]);
-			}		
-		}
-}
-
-if (isset($_POST['action']) && $_POST['action']=="change"){
-  foreach($_SESSION["shopping_cart"] as &$value){
-    if($value['code'] === $_POST["code"]){
-        $value['quantity'] = $_POST["quantity"];
-        break; // Stop the loop after we've found the product
-    }
-}
-  	
-}
-?>
+<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -99,12 +31,6 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
                         <!--li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li-->
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Csapat</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Kapcsolat</a></li>
-                        <!-- ez lesz a php .................................. vasarlas .......................................................................... -->
-                        <?php
-                            if(!empty($_SESSION["shopping_cart"])) {
-                            $cart_count = count(array_keys($_SESSION["shopping_cart"]));
-                        ?>
-                        <!-- ez lesz a php .................................. vasarlas .......................................................................... -->
                     </ul>
                 </div>
             </div>
@@ -325,7 +251,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
                             <p class="text-muted">benedekabalazs@gmail.com <br> +40 740 840 029</p>
                             <!--a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a-->
 
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/balazs.benedek.11"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/benedek.balazs.official"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/balazs-benedek-009322183/"><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/blasio_b_/"><i class="fab fa-instagram"></i></a>
                         </div>
@@ -393,8 +319,18 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
                     </div>
                     <div class="text-center">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Küldés</button>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit"> Küldés </button>
                     </div>
+                    <script>
+                        $(document).ready(function() {
+                            $('#sendMessageButton').click(function() {
+                                $('#contactForm').attr('action',
+                                            'mailto:benedekabalazs@gmail.com?subject=' +
+                                            $('#email').val() + '&body=' + $('#message').val());
+                                $('#contactForm').submit();
+                            });
+                        });
+                    </script>
                 </form>
             </div>
         </section>
