@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 
+<?php
+
+
+if($_POST["message"]) {
+
+
+mail("benedekabalazs@gmail.com", "new",
+
+
+$_POST[$('#message')]. "From: " + $('#email'));
+
+
+}
+
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
