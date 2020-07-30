@@ -319,8 +319,18 @@
                     </div>
                     <div class="text-center">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit"><a href="mailto:benedekbalazs1999@gmail.com"> Küldés </button>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit"> Küldés </button>
                     </div>
+                    <script>
+                        $(document).ready(function() {
+                            $('#sendMessageButton').click(function() {
+                                $('#contactForm').attr('action',
+                                            'mailto:benedekabalazs@gmail.com?subject=' +
+                                            $('#email').val() + '&body=' + $('#message').val());
+                                $('#contactForm').submit();
+                            });
+                        });
+                    </script>
                 </form>
             </div>
         </section>
