@@ -4,7 +4,7 @@
 <br><br>
 <p align="center">
   <a href="https://blasio99.github.io/">
-    <img src="readme/me.png" alt="Logo" width="80" height="80">
+    <img src="assets/img/me.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Benedek Balazs</h3>
