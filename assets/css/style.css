@@ -260,14 +260,14 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero:before {
   content: "";
-  background-image: url("../img/me-no-bg.png");
+  background-image: url("../img/Me-Graphics-White.png");
   background-color: rgba(0, 0, 0, 0.8);
   background-position: right; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: 50%;
   position: absolute;
   bottom: 0;
-  opacity: 60%;
+  opacity: 30%;
   top: 0;
   left: 0;
   right: 0;
