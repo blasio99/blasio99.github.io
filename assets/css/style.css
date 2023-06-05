@@ -250,11 +250,13 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   background-size: cover;
   position: relative;
+  padding-top: 40%;
 }
 
 @media (min-width: 992px) {
   #hero {
     padding-left: 160px;
+    padding-top: 5%;
   }
 }
 
@@ -262,15 +264,32 @@ h1, h2, h3, h4, h5, h6 {
   content: "";
   background-image: url("../img/Me-Graphics-White.png");
   background-color: rgba(0, 0, 0, 0.8);
-  background-position: right; /* Center the image */
+  background-position: center; /* center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: 50%;
+  background-size: 100%;
   position: absolute;
   bottom: 0;
   opacity: 30%;
-  top: 0;
+  top: -50%;
   left: 0;
   right: 0;
+}
+
+@media (min-width: 992px) {
+  #hero:before {
+    content: "";
+    background-image: url("../img/Me-Graphics-White.png");
+    background-color: rgba(0, 0, 0, 0.8);
+    background-position: right; /* center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: 50%;
+    position: absolute;
+    bottom: 0;
+    opacity: 30%;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
 #hero h1 {
